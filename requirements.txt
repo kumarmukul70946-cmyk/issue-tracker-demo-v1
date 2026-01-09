@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+alembic
+pydantic
+psycopg2-binary
+python-multipart
+pytest
+httpx
