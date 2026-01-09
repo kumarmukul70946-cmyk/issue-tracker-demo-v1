@@ -1,20 +1,13 @@
 services:
-  # Python Backend
+  # Python Backend (Free Tier)
   - type: web
     name: issue-tracker-api
     runtime: python
+    # "Free" instance type
+    plan: free
     buildCommand: pip install -r requirements.txt
+    # Start app and use local SQLite file (Data resets on restart in free tier!)
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: issue-tracker-db
-          property: connectionString
-
-databases:
-  # PostgreSQL Database
-  - name: issue-tracker-db
-    databaseName: issue_tracker
-    user: issue_user
