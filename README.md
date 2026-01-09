@@ -1,44 +1,88 @@
-# Issue Tracker API
+# Issue Tracker
 
-Complete backend solution for the Issue Tracker assignment.
+A modern, full-stack Issue Tracking application featuring a responsive Dashboard, comprehensive Issue Management, and Data Visualizations.
 
-## Tech Stack
-- **FastAPI**
-- **PostgreSQL** (Production) / **SQLite** (Testing default)
-- **SQLAlchemy** (ORM)
-- **Alembic** (Migrations - setup required)
-- **Pytest** (Testing)
+![Dashboard Preview](https://placehold.co/1200x600/0f172a/ffffff?text=Issue+Tracker+Dashboard)
+*(Note: Replace this image link with your actual screenshot from the `frontend` folder if you upload one)*
 
-## Setup
+## 🚀 Features
 
-1. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Frontend (React + Vite + TailwindCSS)
+- **📊 Interactive Dashboard**: Real-time stats, recent issues, and top assignee leaderboards.
+- **✨ Modern UI**: Clean aesthetics with glassmorphism, responsive styled components, and animations.
+- **📝 Issue Management**: Create, view, filter (status/priority), and update issues.
+- **📂 CSV Import**: Drag-and-drop bulk import for issues with validation summaries.
+- **🏷️ Labels**: Manage and assign colored labels to issues.
+- **📈 Analytics**: Charts for status distribution and priority analysis using `Recharts`.
 
-2. **Database Configuration**
-   Update `app/database.py` with your PostgreSQL credentials. 
-   Default: `postgresql://postgres:postgres@localhost/issue_tracker`
+### Backend (FastAPI + SQLAlchemy)
+- **🔥 High Performance**: Built on FastAPI with async support.
+- **💾 Database**: SQLite (default for dev) / PostgreSQL compatible.
+- **🛡️ Data Integrity**: Optimistic locking for concurrent updates.
+- **📝 History Tracking**: Audit logs for issue timeline (creation, status changes, comments).
+- **⚡ Bulk Actions**: Transactional updates for multiple issues.
+- **📊 Reporting APIs**: Endpoints for latency metrics and assignee performance.
 
-   *Note: For a quick start without PostgreSQL, you can change the URL in `database.py` to `sqlite:///./sql_app.db` and remove `check_same_thread` arg if not using SQLite (or add it if using SQLite).*
+---
 
-3. **Run the Application**
-   ```bash
-   python -m uvicorn app.main:app --reload
-   ```
-   
-   Access API docs at: http://127.0.0.1:8000/docs
+## 🛠️ Setup & Running
 
-## Features Implemented
-- **Issue CRUD**: Create, Read, Update (with Optimistic Locking).
-- **Comments**: Add comments to issues.
-- **Labels**: Atomic replacement of labels.
-- **Bulk Update**: Transactional bulk status update.
-- **Reports**: Top Assignees & Average Resolution Time.
-- **Testing**: Basic Pytest coverage including optimistic locking check.
+### 1. Backend Setup
+The backend serves the API at `http://localhost:8000`.
 
-## Testing
-Run tests with:
+```bash
+# Navigate to the root folder
+cd "Issue Tracker API"
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run the API server
+python -m uvicorn app.main:app --reload
+```
+*Access Swagger Documentation at: [http://localhost:8000/docs](http://localhost:8000/docs)*
+
+### 2. Frontend Setup
+The frontend runs on `http://localhost:5173`.
+
+```bash
+# Open a new terminal and navigate to frontend
+cd frontend
+
+# Install Node dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+---
+
+## 🧪 Architecture
+
+### Folder Structure
+```
+├── app/                 # Backend Application
+│   ├── routers/        # API Endpoints (issues, comments, reports)
+│   ├── models.py       # Database Models (Issue, Comment, Label, History)
+│   ├── schemas.py      # Pydantic Schemas
+│   └── main.py         # Entry point
+│
+├── frontend/           # React Application
+│   ├── src/
+│   │   ├── components/ # Reusable UI (Card, Layout, Modal)
+│   │   ├── pages/      # Dashboard, IssueList, Reports
+│   │   └── api/        # Axios client
+│   └── tailwind.config.js
+│
+└── tests/              # Pytest Suite
+```
+
+## 🧪 Testing
+Run backend tests to ensure logic correctness:
 ```bash
 python -m pytest
 ```
+
+## 📜 License
+MIT
