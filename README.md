@@ -56,6 +56,28 @@ npm install
 npm run dev
 ```
 
+
+---
+
+## 🚀 Deployment (Vercel)
+
+This project is configured for seamless deployment on Vercel.
+
+1. **Push to GitHub**: Ensure your code is in a GitHub repository.
+2. **Import in Vercel**:
+   - Go to Vercel Dashboard -> Add New -> Project.
+   - Import your repository.
+   - Vercel should automatically detect the configuration from `vercel.json`.
+3. **Environment Variables**:
+   - Add `DATABASE_URL` if you are using a remote database (e.g. Supabase, Neon).
+   - For demo purposes, the default SQLite might work but is ephemeral (resets on redeploy).
+4. **Deploy**: Click Deploy.
+
+The App will be live with:
+- Frontend at `https://your-project.vercel.app/`
+- API at `https://your-project.vercel.app/api/...`
+- Docs at `https://your-project.vercel.app/docs`
+
 ---
 
 ## 🧪 Architecture

@@ -26,7 +26,7 @@ client = TestClient(app)
 
 def test_create_issue():
     response = client.post(
-        "/issues/",
+        "/api/issues/",
         json={"title": "Test Issue", "description": "This is a test issue"}
     )
     assert response.status_code == 200
@@ -35,21 +35,21 @@ def test_create_issue():
     assert "id" in data
 
 def test_read_issues():
-    response = client.get("/issues/")
+    response = client.get("/api/issues/")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
 
 def test_optimistic_locking():
     # Create issue
-    res = client.post("/issues/", json={"title": "Locking Test"})
+    res = client.post("/api/issues/", json={"title": "Locking Test"})
     issue_id = res.json()["id"]
     version = res.json()["version"]
 
     # Update 1
-    res1 = client.patch(f"/issues/{issue_id}", json={"title": "Update 1", "version": version})
+    res1 = client.patch(f"/api/issues/{issue_id}", json={"title": "Update 1", "version": version})
     assert res1.status_code == 200
     new_version = res1.json()["version"]
 
     # Update 2 with OLD version (should fail)
-    res2 = client.patch(f"/issues/{issue_id}", json={"title": "Update 2", "version": version})
+    res2 = client.patch(f"/api/issues/{issue_id}", json={"title": "Update 2", "version": version})
     assert res2.status_code == 409

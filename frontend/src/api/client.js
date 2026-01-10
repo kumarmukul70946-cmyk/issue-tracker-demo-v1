@@ -3,7 +3,7 @@ import { mockIssues, mockStats, mockAssignees, mockLabels } from './mock';
 
 // Detect if we are in "Demo Mode" (GitHub Pages default)
 const isDemoMode = import.meta.env.PROD && !import.meta.env.VITE_API_URL;
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 const api = axios.create({
     baseURL,

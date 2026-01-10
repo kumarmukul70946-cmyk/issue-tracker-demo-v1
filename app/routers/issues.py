@@ -6,6 +6,7 @@ from typing import List, Optional
 from app import models, schemas
 from app.deps import get_db
 from sqlalchemy import func
+from datetime import datetime
 
 router = APIRouter()
 
@@ -160,7 +161,7 @@ async def import_issues(file: UploadFile = File(...), db: Session = Depends(get_
     content = await file.read()
     return await process_csv_import(content, db) # Note: Import service doesn't log history currently to keep it simple
 
-@router.get("/{id}/timeline")
+@router.get("/{id}/timeline", response_model=List[schemas.HistoryOut])
 def get_issue_timeline(id: int, db: Session = Depends(get_db)):
     history = db.query(models.IssueHistory).filter(models.IssueHistory.issue_id == id).order_by(models.IssueHistory.created_at.desc()).all()
     return history

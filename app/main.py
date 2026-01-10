@@ -18,14 +18,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(issues.router, prefix="/issues", tags=["Issues"])
+app.include_router(issues.router, prefix="/api/issues", tags=["Issues"])
 # Comments are often nested under issues, handled in specific routers or separate
 # The plan listed /issues/{id}/comments, so that can be in issues router or shared
 # We'll see how we split it. Plan says: routers/comments.py
-app.include_router(comments.router, prefix="/comments", tags=["Comments"]) 
-app.include_router(labels.router, prefix="/labels", tags=["Labels"])
-app.include_router(reports.router, prefix="/reports", tags=["Reports"])
+app.include_router(comments.router, prefix="/api/comments", tags=["Comments"]) 
+app.include_router(labels.router, prefix="/api/labels", tags=["Labels"])
+app.include_router(reports.router, prefix="/api/reports", tags=["Reports"])
 
-@app.get("/")
+@app.get("/api/health")
 def root():
-    return {"message": "Welcome to the Issue Tracker API"}
+    return {"message": "Welcome to the Issue Tracker API", "status": "ok"}

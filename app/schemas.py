@@ -75,3 +75,13 @@ class IssueOut(IssueBase):
 class BulkStatusUpdate(BaseModel):
     issue_ids: List[int]
     status: str
+
+class HistoryOut(BaseModel):
+    id: int
+    issue_id: int
+    event_type: str
+    details: Optional[str] = None
+    created_at: datetime
+    
+    class Config:
+        orm_mode = True
