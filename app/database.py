@@ -7,7 +7,13 @@ import os
 # Update this with your actual database URL
 # For local dev: postgresql://user:password@localhost/dbname
 # SQLALCHEMY_DATABASE_URL = "postgresql://postgres:postgres@localhost/issue_tracker"
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./sql_app.db")
+# On Vercel, the filesystem is read-only except for /tmp
+# We default to /tmp/sql_app.db for the demo if no DATABASE_URL is set
+default_db = "sqlite:///./sql_app.db"
+if os.environ.get("VERCEL"):
+    default_db = "sqlite:///tmp/sql_app.db"
+
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", default_db)
 
 connect_args = {}
 if "sqlite" in SQLALCHEMY_DATABASE_URL:
