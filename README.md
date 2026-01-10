@@ -70,7 +70,7 @@ This project is configured for seamless deployment on Vercel.
    - Vercel should automatically detect the configuration from `vercel.json`.
 3. **Environment Variables**:
    - Add `DATABASE_URL` if you are using a remote database (e.g. Supabase, Neon).
-   - For demo purposes, the default SQLite might work but is ephemeral (resets on redeploy).
+   - **Note**: This project is configured to fallback to a temporary SQLite database (`/tmp/sql_app.db`) on Vercel if no external database is provided. This data will persist only as long as the instance is running.
 4. **Deploy**: Click Deploy.
 
 The App will be live with:
