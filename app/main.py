@@ -4,7 +4,13 @@ from app.routers import issues, comments, labels, reports
 
 # Create tables (For simplicity in this project, we create them on startup if not using Alembic)
 # In production with Alembic, you might not do this here.
-Base.metadata.create_all(bind=engine)
+# Create tables on startup
+@app.on_event("startup")
+async def startup_event():
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"Error creating database tables: {e}")
 
 app = FastAPI(title="Issue Tracker API", version="1.0.0")
 

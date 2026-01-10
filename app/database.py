@@ -11,7 +11,7 @@ import os
 # We default to /tmp/sql_app.db for the demo if no DATABASE_URL is set
 default_db = "sqlite:///./sql_app.db"
 if os.environ.get("VERCEL"):
-    default_db = "sqlite:///tmp/sql_app.db"
+    default_db = "sqlite:////tmp/sql_app.db"
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", default_db)
 
